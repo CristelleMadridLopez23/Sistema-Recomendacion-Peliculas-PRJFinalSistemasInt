@@ -1,156 +1,185 @@
-from pyDatalog import pyDatalog
-
 # ===========================================================
-# DEFINICIÓN DE TÉRMINOS
+#   MOTOR LÓGICO EN PYTHON PURO (SUSTITUYE PYDATALOG)
 # ===========================================================
-pyDatalog.create_terms('MoodGenero, ClimaGenero, Contenido, Recomendar, RecomendarRelax')
-pyDatalog.create_terms('mood, clima, preferencia_duracion, t, g, d')
 
-# Bandera para evitar duplicación
 _reglas_cargadas = False
 
+# ---------------------------
+# TABLAS / HECHOS
+# ---------------------------
+
+MoodGenero = {}         # mood -> [generos]
+ClimaGenero = {}        # clima -> [generos]
+Contenido = []          # lista de dicts con titulo, genero, duracion
+
+
+def agregar_mood_genero(mood, genero):
+    MoodGenero.setdefault(mood, []).append(genero)
+
+
+def agregar_clima_genero(clima, genero):
+    ClimaGenero.setdefault(clima, []).append(genero)
+
+
+def agregar_contenido(titulo, genero, duracion):
+    Contenido.append({
+        "titulo": titulo,
+        "genero": genero,
+        "duracion": duracion
+    })
+
+
+# ===========================================================
+# CARGA DE HECHOS (REEMPLAZO DIRECTO DE PyDatalog)
+# ===========================================================
 
 def inicializar_reglas():
-    """
-    Inicializa todos los HECHOS y las REGLAS en PyDatalog.
-    Esta función solo se ejecuta una vez por servidor,
-    gracias a la bandera _reglas_cargadas.
-    """
     global _reglas_cargadas
-
     if _reglas_cargadas:
-        return  # evita recargar reglas
+        return
+
     _reglas_cargadas = True
 
-    # ===========================================================
+    # -------------------------------------------------------
     # HECHOS: Mood -> Género
-    # ===========================================================
-    +MoodGenero('Feliz', 'Comedia')
-    +MoodGenero('Feliz', 'Animación')
-    +MoodGenero('Feliz', 'Aventura')
+    # -------------------------------------------------------
+    agregar_mood_genero('Feliz', 'Comedia')
+    agregar_mood_genero('Feliz', 'Animación')
+    agregar_mood_genero('Feliz', 'Aventura')
 
-    +MoodGenero('Triste', 'Drama')
-    +MoodGenero('Triste', 'Romance')
+    agregar_mood_genero('Triste', 'Drama')
+    agregar_mood_genero('Triste', 'Romance')
 
-    +MoodGenero('Motivado', 'Acción')
-    +MoodGenero('Motivado', 'Fantasia')
+    agregar_mood_genero('Motivado', 'Acción')
+    agregar_mood_genero('Motivado', 'Fantasia')
 
-    +MoodGenero('Estresado', 'Sci-Fi')
-    +MoodGenero('Estresado', 'Comedia')
+    agregar_mood_genero('Estresado', 'Sci-Fi')
+    agregar_mood_genero('Estresado', 'Comedia')
 
-    +MoodGenero('Aburrido', 'Suspenso')
-    +MoodGenero('Aburrido', 'Terror')
+    agregar_mood_genero('Aburrido', 'Suspenso')
+    agregar_mood_genero('Aburrido', 'Terror')
 
-    # ===========================================================
+    # -------------------------------------------------------
     # HECHOS: Clima -> Género
-    # ===========================================================
-    +ClimaGenero('Soleado', 'Comedia')
-    +ClimaGenero('Soleado', 'Aventura')
-    +ClimaGenero('Soleado', 'Animación')
+    # -------------------------------------------------------
+    agregar_clima_genero('Soleado', 'Comedia')
+    agregar_clima_genero('Soleado', 'Aventura')
+    agregar_clima_genero('Soleado', 'Animación')
 
-    +ClimaGenero('Lluvioso', 'Romance')
-    +ClimaGenero('Lluvioso', 'Drama')
-    +ClimaGenero('Lluvioso', 'Suspenso')
+    agregar_clima_genero('Lluvioso', 'Romance')
+    agregar_clima_genero('Lluvioso', 'Drama')
+    agregar_clima_genero('Lluvioso', 'Suspenso')
 
-    +ClimaGenero('Nublado', 'Sci-Fi')
-    +ClimaGenero('Nublado', 'Fantasia')
-    +ClimaGenero('Nublado', 'Suspenso')
+    agregar_clima_genero('Nublado', 'Sci-Fi')
+    agregar_clima_genero('Nublado', 'Fantasia')
+    agregar_clima_genero('Nublado', 'Suspenso')
 
-    +ClimaGenero('Frio', 'Drama')
-    +ClimaGenero('Frio', 'Terror')
-    +ClimaGenero('Frio', 'Romance')
+    agregar_clima_genero('Frio', 'Drama')
+    agregar_clima_genero('Frio', 'Terror')
+    agregar_clima_genero('Frio', 'Romance')
 
-    +ClimaGenero('Caluroso', 'Acción')
-    +ClimaGenero('Caluroso', 'Aventura')
+    agregar_clima_genero('Caluroso', 'Acción')
+    agregar_clima_genero('Caluroso', 'Aventura')
 
-    # ===========================================================
+    # -------------------------------------------------------
     # HECHOS: Contenido (10 géneros × 5 títulos)
-    # ===========================================================
+    # -------------------------------------------------------
 
     # 1. Acción
-    +Contenido('John Wick', 'Acción', 'Media')
-    +Contenido('Mad Max: Fury Road', 'Acción', 'Media')
-    +Contenido('The Dark Knight', 'Acción', 'Larga')
-    +Contenido('Mission Impossible: Fallout', 'Acción', 'Media')
-    +Contenido('The Bourne Ultimatum', 'Acción', 'Media')
+    agregar_contenido('John Wick', 'Acción', 'Media')
+    agregar_contenido('Mad Max: Fury Road', 'Acción', 'Media')
+    agregar_contenido('The Dark Knight', 'Acción', 'Larga')
+    agregar_contenido('Mission Impossible: Fallout', 'Acción', 'Media')
+    agregar_contenido('The Bourne Ultimatum', 'Acción', 'Media')
 
     # 2. Comedia
-    +Contenido('The Office', 'Comedia', 'Corta')
-    +Contenido('Friends', 'Comedia', 'Corta')
-    +Contenido('Superbad', 'Comedia', 'Media')
-    +Contenido('The Hangover', 'Comedia', 'Media')
-    +Contenido('Brooklyn 99', 'Comedia', 'Corta')
+    agregar_contenido('The Office', 'Comedia', 'Corta')
+    agregar_contenido('Friends', 'Comedia', 'Corta')
+    agregar_contenido('Superbad', 'Comedia', 'Media')
+    agregar_contenido('The Hangover', 'Comedia', 'Media')
+    agregar_contenido('Brooklyn 99', 'Comedia', 'Corta')
 
     # 3. Drama
-    +Contenido('The Pursuit of Happyness', 'Drama', 'Media')
-    +Contenido('The Shawshank Redemption', 'Drama', 'Media')
-    +Contenido('Breaking Bad', 'Drama', 'Larga')
-    +Contenido('The Green Mile', 'Drama', 'Larga')
-    +Contenido('A Beautiful Mind', 'Drama', 'Media')
+    agregar_contenido('The Pursuit of Happyness', 'Drama', 'Media')
+    agregar_contenido('The Shawshank Redemption', 'Drama', 'Media')
+    agregar_contenido('Breaking Bad', 'Drama', 'Larga')
+    agregar_contenido('The Green Mile', 'Drama', 'Larga')
+    agregar_contenido('A Beautiful Mind', 'Drama', 'Media')
 
     # 4. Romance
-    +Contenido('The Notebook', 'Romance', 'Media')
-    +Contenido('Your Name', 'Romance', 'Media')
-    +Contenido('La La Land', 'Romance', 'Media')
-    +Contenido('Titanic', 'Romance', 'Larga')
-    +Contenido('Pride & Prejudice', 'Romance', 'Media')
+    agregar_contenido('The Notebook', 'Romance', 'Media')
+    agregar_contenido('Your Name', 'Romance', 'Media')
+    agregar_contenido('La La Land', 'Romance', 'Media')
+    agregar_contenido('Titanic', 'Romance', 'Larga')
+    agregar_contenido('Pride & Prejudice', 'Romance', 'Media')
 
     # 5. Sci-Fi
-    +Contenido('Interstellar', 'Sci-Fi', 'Larga')
-    +Contenido('Dark', 'Sci-Fi', 'Larga')
-    +Contenido('Blade Runner 2049', 'Sci-Fi', 'Larga')
-    +Contenido('Ex Machina', 'Sci-Fi', 'Media')
-    +Contenido('The Matrix', 'Sci-Fi', 'Media')
+    agregar_contenido('Interstellar', 'Sci-Fi', 'Larga')
+    agregar_contenido('Dark', 'Sci-Fi', 'Larga')
+    agregar_contenido('Blade Runner 2049', 'Sci-Fi', 'Larga')
+    agregar_contenido('Ex Machina', 'Sci-Fi', 'Media')
+    agregar_contenido('The Matrix', 'Sci-Fi', 'Media')
 
     # 6. Suspenso
-    +Contenido('Gone Girl', 'Suspenso', 'Media')
-    +Contenido('Shutter Island', 'Suspenso', 'Media')
-    +Contenido('Seven', 'Suspenso', 'Media')
-    +Contenido('Mindhunter', 'Suspenso', 'Larga')
-    +Contenido('Black Swan', 'Suspenso', 'Media')
+    agregar_contenido('Gone Girl', 'Suspenso', 'Media')
+    agregar_contenido('Shutter Island', 'Suspenso', 'Media')
+    agregar_contenido('Seven', 'Suspenso', 'Media')
+    agregar_contenido('Mindhunter', 'Suspenso', 'Larga')
+    agregar_contenido('Black Swan', 'Suspenso', 'Media')
 
     # 7. Aventura
-    +Contenido('Indiana Jones', 'Aventura', 'Media')
-    +Contenido('Jumanji', 'Aventura', 'Media')
-    +Contenido('Harry Potter', 'Aventura', 'Larga')
-    +Contenido('Jurassic Park', 'Aventura', 'Media')
-    +Contenido('Pirates of the Caribbean', 'Aventura', 'Media')
+    agregar_contenido('Indiana Jones', 'Aventura', 'Media')
+    agregar_contenido('Jumanji', 'Aventura', 'Media')
+    agregar_contenido('Harry Potter', 'Aventura', 'Larga')
+    agregar_contenido('Jurassic Park', 'Aventura', 'Media')
+    agregar_contenido('Pirates of the Caribbean', 'Aventura', 'Media')
 
     # 8. Fantasia
-    +Contenido('The Lord of the Rings', 'Fantasia', 'Larga')
-    +Contenido('The Witcher', 'Fantasia', 'Larga')
-    +Contenido('Narnia', 'Fantasia', 'Media')
-    +Contenido('Shadow and Bone', 'Fantasia', 'Larga')
-    +Contenido('The Hobbit', 'Fantasia', 'Larga')
+    agregar_contenido('The Lord of the Rings', 'Fantasia', 'Larga')
+    agregar_contenido('The Witcher', 'Fantasia', 'Larga')
+    agregar_contenido('Narnia', 'Fantasia', 'Media')
+    agregar_contenido('Shadow and Bone', 'Fantasia', 'Larga')
+    agregar_contenido('The Hobbit', 'Fantasia', 'Larga')
 
     # 9. Terror
-    +Contenido('The Conjuring', 'Terror', 'Media')
-    +Contenido('Hereditary', 'Terror', 'Media')
-    +Contenido('IT', 'Terror', 'Larga')
-    +Contenido('A Quiet Place', 'Terror', 'Media')
-    +Contenido('The Haunting of Hill House', 'Terror', 'Larga')
+    agregar_contenido('The Conjuring', 'Terror', 'Media')
+    agregar_contenido('Hereditary', 'Terror', 'Media')
+    agregar_contenido('IT', 'Terror', 'Larga')
+    agregar_contenido('A Quiet Place', 'Terror', 'Media')
+    agregar_contenido('The Haunting of Hill House', 'Terror', 'Larga')
 
     # 10. Animación
-    +Contenido('Coco', 'Animación', 'Media')
-    +Contenido('Spider-Man: Into the Spider-Verse', 'Animación', 'Media')
-    +Contenido('Toy Story', 'Animación', 'Media')
-    +Contenido('Shrek', 'Animación', 'Media')
-    +Contenido('Soul', 'Animación', 'Media')
+    agregar_contenido('Coco', 'Animación', 'Media')
+    agregar_contenido('Spider-Man: Into the Spider-Verse', 'Animación', 'Media')
+    agregar_contenido('Toy Story', 'Animación', 'Media')
+    agregar_contenido('Shrek', 'Animación', 'Media')
+    agregar_contenido('Soul', 'Animación', 'Media')
 
-    # ===========================================================
-    # REGLAS LÓGICAS
-    # ===========================================================
 
-    # Recomendación exacta (match perfecto)
-    Recomendar(t, g, d, mood, clima, preferencia_duracion) <= (
-        MoodGenero(mood, g) &
-        ClimaGenero(clima, g) &
-        Contenido(t, g, d) &
-        (d == preferencia_duracion)
-    )
+# ===========================================================
+# REGLAS / Funciones de inferencia (Equivalente a PyDatalog)
+# ===========================================================
 
-    # Recomendación relajada (solo mood)
-    RecomendarRelax(t, g, d, mood) <= (
-        MoodGenero(mood, g) &
-        Contenido(t, g, d)
-    )
+def recomendar_exacta(mood, clima, duracion):
+    generos_mood = MoodGenero.get(mood, [])
+    generos_clima = ClimaGenero.get(clima, [])
+
+    generos_validos = set(generos_mood) & set(generos_clima)
+
+    recomendaciones = [
+        c for c in Contenido
+        if c["genero"] in generos_validos and c["duracion"] == duracion
+    ]
+
+    return recomendaciones
+
+
+def recomendar_relax(mood):
+    generos_mood = MoodGenero.get(mood, [])
+
+    recomendaciones = [
+        c for c in Contenido
+        if c["genero"] in generos_mood
+    ]
+
+    return recomendaciones

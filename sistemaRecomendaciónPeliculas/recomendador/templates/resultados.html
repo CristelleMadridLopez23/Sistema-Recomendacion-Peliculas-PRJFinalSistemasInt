@@ -1,11 +1,4 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Resultados</title>
-</head>
-<body>
-
-<h1>Resultados de la Recomendación</h1>
+<h1>Resultados</h1>
 
 <p><strong>Mood:</strong> {{ mood }}</p>
 <p><strong>Clima:</strong> {{ clima }}</p>
@@ -13,12 +6,12 @@
 
 <hr>
 
-<h2>Recomendación Exacta (si existe)</h2>
+<h2>Recomendación</h2>
 
 {% if resultado_exacto %}
     <ul>
-        {% for r in resultado_exacto.answers %}
-            <li>{{ r[0] }} — {{ r[1] }} ({{ r[2] }})</li>
+        {% for r in resultado_exacto %}
+            <li>{{ r.titulo }} — {{ r.genero }} ({{ r.duracion }})</li>
         {% endfor %}
     </ul>
 {% else %}
@@ -27,21 +20,14 @@
 
 <hr>
 
-<h2>Recomendación Relajada (solo por mood)</h2>
+<h2>Recomendación solo por Estado de Ánimo</h2>
 
 {% if resultado_relax %}
     <ul>
-        {% for r in resultado_relax.answers %}
-            <li>{{ r[0] }} — {{ r[1] }} ({{ r[2] }})</li>
+        {% for r in resultado_relax %}
+            <li>{{ r.titulo }} — {{ r.genero }} ({{ r.duracion }})</li>
         {% endfor %}
     </ul>
 {% else %}
-    <p>No fue necesario usar el modo relajado.</p>
+    <p>No hay recomendaciones por mood.</p>
 {% endif %}
-
-<br>
-
-<a href="/">Volver</a>
-
-</body>
-</html>
