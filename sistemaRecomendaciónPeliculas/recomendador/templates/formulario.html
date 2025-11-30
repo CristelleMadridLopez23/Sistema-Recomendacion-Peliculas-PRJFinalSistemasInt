@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Sistema de Recomendación</title>
+</head>
+<body>
+    <h1>Sistema de Recomendación Inteligente</h1>
+
+    <form method="POST">
+        {% csrf_token %}
+
+        <label>Mood del usuario:</label>
+        <select name="mood" required>
+            <option value="Feliz">Feliz</option>
+            <option value="Triste">Triste</option>
+            <option value="Motivado">Motivado</option>
+            <option value="Estresado">Estresado</option>
+            <option value="Aburrido">Aburrido</option>
+        </select>
+
+        <br><br>
+
+        <label>Clima actual:</label>
+        <select name="clima" required>
+            <option value="Soleado">Soleado</option>
+            <option value="Lluvioso">Lluvioso</option>
+            <option value="Nublado">Nublado</option>
+            <option value="Frio">Frio</option>
+            <option value="Caluroso">Caluroso</option>
+        </select>
+
+        <br><br>
+
+        <label>Duración preferida:</label>
+        <select name="duracion" required>
+            <option value="Corta">Corta</option>
+            <option value="Media">Media</option>
+            <option value="Larga">Larga</option>
+        </select>
+
+        <br><br>
+
+        <button type="submit">Recomendar</button>
+    </form>
+
+</body>
+</html>

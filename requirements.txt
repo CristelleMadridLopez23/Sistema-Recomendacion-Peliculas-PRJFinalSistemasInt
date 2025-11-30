@@ -1,0 +1,18 @@
+# Framework principal
+Django==4.2.13
+
+# Formularios y UI
+django-crispy-forms==2.2
+crispy-bootstrap5==2024.2
+
+# Utilidades
+python-decouple==3.8
+pillow==10.4.0
+
+# Extras recomendados (para mantener calidad de código)
+black==24.8.0
+flake8==7.1.0
+
+pyDatalog==0.17.4
+
+python=3.10

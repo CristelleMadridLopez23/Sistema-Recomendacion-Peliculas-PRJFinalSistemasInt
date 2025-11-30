@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Resultados</title>
+</head>
+<body>
+
+<h1>Resultados de la Recomendación</h1>
+
+<p><strong>Mood:</strong> {{ mood }}</p>
+<p><strong>Clima:</strong> {{ clima }}</p>
+<p><strong>Duración:</strong> {{ duracion }}</p>
+
+<hr>
+
+<h2>Recomendación Exacta (si existe)</h2>
+
+{% if resultado_exacto %}
+    <ul>
+        {% for r in resultado_exacto.answers %}
+            <li>{{ r[0] }} — {{ r[1] }} ({{ r[2] }})</li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>No hay coincidencia exacta.</p>
+{% endif %}
+
+<hr>
+
+<h2>Recomendación Relajada (solo por mood)</h2>
+
+{% if resultado_relax %}
+    <ul>
+        {% for r in resultado_relax.answers %}
+            <li>{{ r[0] }} — {{ r[1] }} ({{ r[2] }})</li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>No fue necesario usar el modo relajado.</p>
+{% endif %}
+
+<br>
+
+<a href="/">Volver</a>
+
+</body>
+</html>
