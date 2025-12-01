@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CineMind - Recomendador Inteligente</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Ocultar barra de scroll pero permitir desplazamiento */
+        .hide-scroll-bar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scroll-bar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-white font-sans antialiased">
+
+    <!-- Navbar -->
+    <nav class="flex items-center justify-between px-8 py-4 bg-black/50 fixed w-full z-50 backdrop-blur-sm">
+        <div class="text-2xl font-bold text-red-600 tracking-wider">CINEMIND</div>
+        <div>
+            <a href="{% url 'recomendaciones' %}" class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded font-semibold transition">
+                Buscar Recomendación
+            </a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="relative h-screen flex items-center justify-center overflow-hidden">
+        <!-- Imagen de fondo oscurecida -->
+        <div class="absolute inset-0 z-0">
+            <img src="https://images.unsplash.com/photo-1536440136628-849c177e76a1?q=80&w=2525&auto=format&fit=crop" 
+                 class="w-full h-full object-cover opacity-40" alt="Background">
+            <div class="absolute inset-0 bg-gradient-to-t from-gray-900 via-transparent to-black/60"></div>
+        </div>
+
+        <div class="relative z-10 text-center px-4 max-w-4xl mx-auto mt-16">
+            <h1 class="text-5xl md:text-7xl font-extrabold mb-6 leading-tight">
+                ¿No sabes qué ver hoy?
+            </h1>
+            <p class="text-xl md:text-2xl text-gray-300 mb-10">
+                Deja que nuestra Inteligencia Artificial encuentre la película perfecta basada en tu estado de ánimo, el clima y tu tiempo disponible.
+            </p>
+            <a href="{% url 'recomendaciones' %}" class="group relative inline-flex items-center justify-center px-8 py-4 text-lg font-bold text-white transition-all duration-200 bg-red-600 font-pj rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900 hover:bg-red-700 transform hover:scale-105">
+                Comenzar Ahora
+                <svg class="w-5 h-5 ml-2 -mr-1 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path></svg>
+            </a>
+        </div>
+    </header>
+
+    <!-- Footer -->
+    <footer class="bg-black py-8 text-center text-gray-500 text-sm">
+        <p>&copy; 2025 Sistema de Recomendación Inteligente. Proyecto Final.</p>
+    </footer>

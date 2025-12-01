@@ -26,3 +26,6 @@ def formulario(request):
         })
 
     return render(request, "formulario.html")
+
+def home(request):
+    return render(request, "home.html")

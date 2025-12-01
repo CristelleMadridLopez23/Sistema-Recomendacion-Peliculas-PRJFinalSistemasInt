@@ -1,47 +1,95 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
-    <title>Sistema de Recomendación</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CineMind - Buscar Recomendación</title>
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
-    <h1>Sistema de Recomendación Inteligente</h1>
+<body class="bg-gray-900 text-white font-sans antialiased min-h-screen flex flex-col">
 
-    <form method="POST">
-        {% csrf_token %}
+    <!-- Navbar -->
+    <nav class="flex items-center justify-between px-8 py-4 bg-black/50 fixed w-full z-50 backdrop-blur-sm">
+        <a href="{% url 'home' %}" class="text-2xl font-bold text-red-600 tracking-wider hover:text-red-500 transition">CINEMIND</a>
+        <div>
+            <a href="{% url 'home' %}" class="text-gray-300 hover:text-white transition text-sm font-medium">
+                &larr; Volver al Inicio
+            </a>
+        </div>
+    </nav>
 
-        <label>Mood del usuario:</label>
-        <select name="mood" required>
-            <option value="Feliz">Feliz</option>
-            <option value="Triste">Triste</option>
-            <option value="Motivado">Motivado</option>
-            <option value="Estresado">Estresado</option>
-            <option value="Aburrido">Aburrido</option>
-        </select>
+    <!-- Main Content -->
+    <main class="flex-grow flex items-center justify-center px-4 pt-20 pb-10 relative">
+        <!-- Background Image -->
+        <div class="absolute inset-0 z-0">
+             <img src="https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?q=80&w=2070&auto=format&fit=crop" 
+                 class="w-full h-full object-cover opacity-20" alt="Background">
+            <div class="absolute inset-0 bg-gradient-to-b from-gray-900/80 via-gray-900/90 to-gray-900"></div>
+        </div>
 
-        <br><br>
+        <!-- Form Card -->
+        <div class="relative z-10 w-full max-w-md bg-gray-800/60 backdrop-blur-md p-8 rounded-2xl shadow-2xl border border-gray-700/50">
+            <div class="text-center mb-8">
+                <h1 class="text-3xl font-bold text-white mb-2">Encuentra tu Película</h1>
+                <p class="text-gray-400 text-sm">Configura los parámetros para que la IA haga su magia.</p>
+            </div>
 
-        <label>Clima actual:</label>
-        <select name="clima" required>
-            <option value="Soleado">Soleado</option>
-            <option value="Lluvioso">Lluvioso</option>
-            <option value="Nublado">Nublado</option>
-            <option value="Frio">Frio</option>
-            <option value="Caluroso">Caluroso</option>
-        </select>
+            <form method="POST" class="space-y-6">
+                {% csrf_token %}
 
-        <br><br>
+                <!-- Mood Input -->
+                <div>
+                    <label class="block text-sm font-medium text-gray-300 mb-2">¿Cómo te sientes hoy?</label>
+                    <div class="relative">
+                        <select name="mood" required class="block w-full pl-4 pr-10 py-3 text-base border border-gray-600 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500 sm:text-sm rounded-lg bg-gray-700/50 text-white appearance-none transition-colors hover:bg-gray-700">
+                            <option value="" disabled selected>Selecciona tu estado de ánimo</option>
+                            <option value="Feliz">😄 Feliz</option>
+                            <option value="Triste">😢 Triste</option>
+                            <option value="Motivado">🔥 Motivado</option>
+                            <option value="Estresado">😫 Estresado</option>
+                            <option value="Aburrido">🥱 Aburrido</option>
+                        </select>
+                        <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-400">
+                            <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </div>
+                    </div>
+                </div>
 
-        <label>Duración preferida:</label>
-        <select name="duracion" required>
-            <option value="Corta">Corta</option>
-            <option value="Media">Media</option>
-            <option value="Larga">Larga</option>
-        </select>
+                <!-- Clima Input -->
+                <div>
+                    <label class="block text-sm font-medium text-gray-300 mb-2">¿Cómo está el clima?</label>
+                    <div class="relative">
+                        <select name="clima" required class="block w-full pl-4 pr-10 py-3 text-base border border-gray-600 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500 sm:text-sm rounded-lg bg-gray-700/50 text-white appearance-none transition-colors hover:bg-gray-700">
+                            <option value="" disabled selected>Selecciona el clima</option>
+                            <option value="Soleado">☀️ Soleado</option>
+                            <option value="Lluvioso">🌧️ Lluvioso</option>
+                            <option value="Nublado">☁️ Nublado</option>
+                            <option value="Frio">❄️ Frío</option>
+                            <option value="Caluroso">🥵 Caluroso</option>
+                        </select>
+                        <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-400">
+                            <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </div>
+                    </div>
+                </div>
 
-        <br><br>
+                <!-- Duracion Input -->
+                <div>
+                    <label class="block text-sm font-medium text-gray-300 mb-2">¿Cuánto tiempo tienes?</label>
+                    <div class="relative">
+                        <select name="duracion" required class="block w-full pl-4 pr-10 py-3 text-base border border-gray-600 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500 sm:text-sm rounded-lg bg-gray-700/50 text-white appearance-none transition-colors hover:bg-gray-700">
+                            <option value="" disabled selected>Selecciona la duración</option>
+                            <option value="Corta">⏱️ Corta (Series/Sitcoms)</option>
+                            <option value="Media">🎬 Media (90-120 min)</option>
+                            <option value="Larga">🍿 Larga (+2 horas)</option>
+                        </select>
+                        <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-400">
+                            <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </div>
+                    </div>
+                </div>
 
-        <button type="submit">Recomendar</button>
-    </form>
-
-</body>
-</html>
+                <!-- Submit Button -->
+                <button type="submit" class="w-full flex justify-center py-3 px-4 border border-transparent rounded-full shadow-lg text-sm font-bold text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 transition transform hover:scale-105 mt-6">
+                    Obtener Recomendación
+                </button>
