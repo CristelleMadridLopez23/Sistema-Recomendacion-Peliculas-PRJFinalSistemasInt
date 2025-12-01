@@ -1,0 +1,51 @@
+﻿id,titulo,tipo,genero,duracion,estado_animo,clima,tiempo_disponible
+1,John Wick,Pelicula,Acción,Media,Motivado,Caluroso,Medio
+2,Mad Max: Fury Road,Pelicula,Acción,Media,Motivado,Caluroso,Medio
+3,The Dark Knight,Pelicula,Acción,Larga,Motivado,Caluroso,Largo
+4,Mission Impossible: Fallout,Pelicula,Acción,Media,Motivado,Caluroso,Medio
+5,The Bourne Ultimatum,Pelicula,Acción,Media,Motivado,Caluroso,Medio
+6,The Office,Serie,Comedia,Corta,Feliz,Soleado,Corto
+7,Friends,Serie,Comedia,Corta,Feliz,Soleado,Corto
+8,Superbad,Pelicula,Comedia,Media,Estresado,Soleado,Medio
+9,The Hangover,Pelicula,Comedia,Media,Feliz,Soleado,Medio
+10,Brooklyn 99,Serie,Comedia,Corta,Estresado,Soleado,Corto
+11,The Pursuit of Happyness,Pelicula,Drama,Media,Triste,Lluvioso,Medio
+12,The Shawshank Redemption,Pelicula,Drama,Media,Triste,Lluvioso,Medio
+13,Breaking Bad,Serie,Drama,Larga,Triste,Frio,Largo
+14,The Green Mile,Pelicula,Drama,Larga,Triste,Frio,Largo
+15,A Beautiful Mind,Pelicula,Drama,Media,Triste,Lluvioso,Medio
+16,The Notebook,Pelicula,Romance,Media,Triste,Lluvioso,Medio
+17,Your Name,Pelicula,Romance,Media,Triste,Lluvioso,Medio
+18,La La Land,Pelicula,Romance,Media,Triste,Frio,Medio
+19,Titanic,Pelicula,Romance,Larga,Triste,Frio,Largo
+20,Pride & Prejudice,Pelicula,Romance,Media,Triste,Lluvioso,Medio
+21,Interstellar,Pelicula,Sci-Fi,Larga,Estresado,Nublado,Largo
+22,Dark,Serie,Sci-Fi,Larga,Estresado,Nublado,Largo
+23,Blade Runner 2049,Pelicula,Sci-Fi,Larga,Estresado,Nublado,Largo
+24,Ex Machina,Pelicula,Sci-Fi,Media,Estresado,Nublado,Medio
+25,The Matrix,Pelicula,Sci-Fi,Media,Estresado,Nublado,Medio
+26,Gone Girl,Pelicula,Suspenso,Media,Aburrido,Nublado,Medio
+27,Shutter Island,Pelicula,Suspenso,Media,Aburrido,Lluvioso,Medio
+28,Seven,Pelicula,Suspenso,Media,Aburrido,Nublado,Medio
+29,Mindhunter,Serie,Suspenso,Larga,Aburrido,Lluvioso,Largo
+30,Black Swan,Pelicula,Suspenso,Media,Aburrido,Lluvioso,Medio
+31,Indiana Jones,Pelicula,Aventura,Media,Feliz,Soleado,Medio
+32,Jumanji,Pelicula,Aventura,Media,Feliz,Caluroso,Medio
+33,Harry Potter,Pelicula,Aventura,Larga,Feliz,Soleado,Largo
+34,Jurassic Park,Pelicula,Aventura,Media,Feliz,Soleado,Medio
+35,Pirates of the Caribbean,Pelicula,Aventura,Media,Feliz,Caluroso,Medio
+36,The Lord of the Rings,Pelicula,Fantasia,Larga,Motivado,Nublado,Largo
+37,The Witcher,Serie,Fantasia,Larga,Motivado,Nublado,Largo
+38,Narnia,Pelicula,Fantasia,Media,Motivado,Nublado,Medio
+39,Shadow and Bone,Serie,Fantasia,Larga,Motivado,Nublado,Largo
+40,The Hobbit,Pelicula,Fantasia,Larga,Motivado,Nublado,Largo
+41,The Conjuring,Pelicula,Terror,Media,Aburrido,Frio,Medio
+42,Hereditary,Pelicula,Terror,Media,Aburrido,Frio,Medio
+43,IT,Pelicula,Terror,Larga,Aburrido,Frio,Largo
+44,A Quiet Place,Pelicula,Terror,Media,Aburrido,Frio,Medio
+45,The Haunting of Hill House,Serie,Terror,Larga,Aburrido,Frio,Largo
+46,Coco,Pelicula,Animación,Media,Feliz,Soleado,Medio
+47,Spider-Man: Into the Spider-Verse,Pelicula,Animación,Media,Feliz,Soleado,Medio
+48,Toy Story,Pelicula,Animación,Media,Feliz,Soleado,Medio
+49,Shrek,Pelicula,Animación,Media,Feliz,Soleado,Medio
+50,Soul,Pelicula,Animación,Media,Feliz,Soleado,Medio
