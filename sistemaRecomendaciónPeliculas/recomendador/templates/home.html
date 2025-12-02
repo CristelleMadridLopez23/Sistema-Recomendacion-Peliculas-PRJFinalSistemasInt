@@ -21,9 +21,14 @@
     <!-- Navbar -->
     <nav class="flex items-center justify-between px-8 py-4 bg-black/50 fixed w-full z-50 backdrop-blur-sm">
         <div class="text-2xl font-bold text-red-600 tracking-wider">CINEMIND</div>
-        <div>
-            <a href="{% url 'recomendaciones' %}" class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded font-semibold transition">
-                Buscar Recomendación
+        
+        <!-- Contenedor flex para los botones -->
+        <div class="flex items-center gap-4">
+            <a href="{% url 'agregar' %}" class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded font-semibold transition text-sm">
+                Ampliar Base de Conocimiento
+            </a>
+            <a href="https://www.canva.com/design/DAG6XEk3iEo/PIZWzS5TR1r2ofFsnHG_PQ/edit?utm_content=DAG6XEk3iEo&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton" target="_blank" class="bg-gray-700 hover:bg-gray-600 text-white px-4 py-2 rounded font-semibold transition text-sm">
+                Manual de Usuario
             </a>
         </div>
     </nav>

@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agregar Recomendación</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-900 text-white font-sans antialiased min-h-screen flex flex-col">
+<nav class="flex items-center justify-between px-8 py-4 bg-black/50 fixed w-full z-50 backdrop-blur-sm">
+    <a href="{% url 'home' %}" class="text-2xl font-bold text-red-600">CINEMIND</a>
+    <div><a href="{% url 'home' %}" class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded font-semibold transition">Volver al inicio</a></div>
+    <div><a href="{% url 'recomendaciones' %}" class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded font-semibold transition">Buscar Recomendacion</a></div>
+</nav>
+
+<main class="flex-grow flex flex-col items-center justify-start pt-24 pb-10 px-4 gap-8">
+
+    <!-- 1. SECCIÓN TABLA (Ahora está arriba) -->
+    <div class="w-full max-w-6xl bg-gray-800/60 p-8 rounded-xl border border-gray-700 order-1">
+        <h2 class="text-2xl font-bold mb-4 text-gray-100">Base de Conocimiento Actual</h2>
+        <div class="overflow-x-auto max-h-96 overflow-y-auto scrollbar-thin scrollbar-thumb-red-600 scrollbar-track-gray-800">
+            <table class="w-full text-left text-sm text-gray-300">
+                <thead class="bg-gray-700 text-white uppercase sticky top-0">
+                    <tr>
+                        <th class="px-4 py-3">ID</th>
+                        <th class="px-4 py-3">Título</th>
+                        <th class="px-4 py-3">Tipo</th>
+                        <th class="px-4 py-3">Género</th>
+                        <th class="px-4 py-3">Duración</th>
+                        <th class="px-4 py-3">Mood</th>
+                        <th class="px-4 py-3">Clima</th>
+                        <th class="px-4 py-3">Tiempo Disp.</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-gray-700">
+                    {% for peli in lista_peliculas %}
+                    <tr class="hover:bg-gray-700/50 transition-colors">
+                        <td class="px-4 py-2 text-gray-500">#{{ peli.id }}</td>
+                        <td class="px-4 py-2 font-bold text-white">{{ peli.titulo }}</td>
+                        <td class="px-4 py-2">
+                            <span class="px-2 py-1 rounded text-xs font-semibold 
+                                {% if peli.tipo == 'Pelicula' %}bg-blue-900 text-blue-200{% else %}bg-purple-900 text-purple-200{% endif %}">
+                                {{ peli.tipo }}
+                            </span>
+                        </td>
+                        <td class="px-4 py-2">{{ peli.genero }}</td>
+                        <td class="px-4 py-2">{{ peli.duracion }}</td>
+                        <td class="px-4 py-2">{{ peli.estado_animo }}</td>
+                        <td class="px-4 py-2">{{ peli.clima }}</td>
+                        <td class="px-4 py-2">{{ peli.tiempo_disponible }}</td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="8" class="px-4 py-8 text-center text-gray-500">
+                            No hay películas registradas en la base de datos aún.
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- 2. SECCIÓN FORMULARIO (Ahora está abajo) -->
+    <div class="w-full max-w-6xl bg-gray-800/60 p-8 rounded-xl border border-gray-700 order-2">
+        <h2 class="text-2xl font-bold mb-4">Agregar Nueva Entrada</h2>
+
+        {% if mensaje %}
+            <div class="mb-4 p-3 rounded {{ exito|yesno:'bg-green-700,bg-red-700' }}">
+                {{ mensaje }}
+            </div>
+        {% endif %}
+
+        <form method="POST" class="space-y-4">
+            {% csrf_token %}
+            
+            <!-- Título -->
+            <div>
+                <label class="block text-xs text-gray-400 mb-1">Título</label>
+                <input name="titulo" placeholder="Ej. Matrix" required class="w-full px-3 py-2 rounded bg-gray-700 border border-gray-600 focus:border-red-500 outline-none">
+            </div>
+
+            <!-- Tipo y Género (En una fila) -->
+            <div class="grid grid-cols-2 gap-4">
+                <div>
+                    <label class="block text-xs text-gray-400 mb-1">Tipo</label>
+                    <select name="tipo" required class="w-full px-3 py-2 rounded bg-gray-700 border border-gray-600 focus:border-red-500 outline-none">
+                        <option value="Pelicula">Película</option>
+                        <option value="Serie">Serie</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-xs text-gray-400 mb-1">Género</label>
+                    <input name="genero" placeholder="Ej. Sci-Fi" required class="w-full px-3 py-2 rounded bg-gray-700 border border-gray-600 focus:border-red-500 outline-none">
+                </div>
+            </div>
+
+            <!-- Duración (Columna CSV: duracion) -->
+            <div>
+                <label class="block text-xs text-gray-400 mb-1">Duración (Categoría)</label>
+                <select name="duracion" required class="w-full px-3 py-2 rounded bg-gray-700 border border-gray-600 focus:border-red-500 outline-none">
+                    <option value="" disabled selected>Selecciona...</option>
+                    <option value="Corta">Corta</option>
+                    <option value="Media">Media</option>
+                    <option value="Larga">Larga</option>
+                </select>
+            </div>
+
+            <!-- Estado de Ánimo -->
+            <div>
+                <label class="block text-xs text-gray-400 mb-1">Estado de Ánimo Ideal</label>
+                <select name="estado_animo" required class="w-full px-3 py-2 rounded bg-gray-700 border border-gray-600 focus:border-red-500 outline-none">
+                    <option value="" disabled selected>Selecciona...</option>
+                    <option value="Feliz">😄 Feliz</option>
+                    <option value="Triste">😢 Triste</option>
+                    <option value="Motivado">🔥 Motivado</option>
+                    <option value="Estresado">😫 Estresado</option>
+                    <option value="Aburrido">🥱 Aburrido</option>
+                </select>
+            </div>
+
+            <!-- Clima -->
+            <div>
+                <label class="block text-xs text-gray-400 mb-1">Clima Ideal</label>
+                <select name="clima" required class="w-full px-3 py-2 rounded bg-gray-700 border border-gray-600 focus:border-red-500 outline-none">
+                    <option value="" disabled selected>Selecciona...</option>
+                    <option value="Soleado">☀️ Soleado</option>
+                    <option value="Lluvioso">🌧️ Lluvioso</option>
+                    <option value="Nublado">☁️ Nublado</option>
+                    <option value="Frio">❄️ Frío</option>
+                    <option value="Caluroso">🥵 Caluroso</option>
+                </select>
+            </div>
+
+            <!-- Tiempo Disponible (Columna CSV: tiempo_disponible) -->
+            <div>
+                <label class="block text-xs text-gray-400 mb-1">Tiempo Disponible Requerido</label>
+                <select name="tiempo_disponible" required class="w-full px-3 py-2 rounded bg-gray-700 border border-gray-600 focus:border-red-500 outline-none">
+                    <option value="" disabled selected>Selecciona...</option>
+                    <option value="Corto">⏱️ Corto</option>
+                    <option value="Medio">🎬 Medio</option>
+                    <option value="Largo">🍿 Largo</option>
+                </select>
+            </div>
+
+            <button type="submit" class="w-full bg-red-600 hover:bg-red-700 py-3 rounded font-bold transition transform hover:scale-105">
+Guardar en Base de Conocimiento
+</button>
+</form>
+</div>

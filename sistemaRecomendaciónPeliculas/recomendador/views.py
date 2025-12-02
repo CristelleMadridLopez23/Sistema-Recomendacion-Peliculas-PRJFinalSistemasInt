@@ -31,3 +31,35 @@ def formulario(request):
 
 def home(request):
     return render(request, "home.html")
+
+
+def agregar_recomendacion(request):
+    """
+    Formulario para añadir una nueva película/serie al CSV.
+    """
+    context = {}
+
+    if request.method == "POST":
+        titulo = request.POST.get("titulo")
+        tipo = request.POST.get("tipo")
+        genero = request.POST.get("genero")
+        duracion = request.POST.get("duracion")
+        estado_animo = request.POST.get("estado_animo")
+        clima = request.POST.get("clima")
+        tiempo_disponible = request.POST.get("tiempo_disponible")
+
+        ok, msg = motor.agregar_pelicula(titulo, tipo, genero, duracion, estado_animo, clima, tiempo_disponible)
+        context["mensaje"] = msg
+        context["exito"] = ok
+
+    # Obtener lista actualizada de películas para mostrar en la tabla
+    if motor.datos is not None:
+        # Ordenamos por ID descendente para ver las últimas agregadas primero
+        if 'id' in motor.datos.columns:
+            context["lista_peliculas"] = motor.datos.sort_values(by='id', ascending=False).to_dict('records')
+        else:
+            context["lista_peliculas"] = motor.datos.to_dict('records')
+    else:
+        context["lista_peliculas"] = []
+
+    return render(request, "agregar.html", context)

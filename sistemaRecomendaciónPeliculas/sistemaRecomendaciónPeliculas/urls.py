@@ -17,11 +17,12 @@ Including another URLconf
 
 from django.contrib import admin
 from django.urls import path
-from recomendador.views import formulario , home 
+from recomendador.views import formulario , home , agregar_recomendacion
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', home, name='home'),
     path('recomendaciones/', formulario, name='recomendaciones'),
+    path('agregar/', agregar_recomendacion, name='agregar'),
 ]
 

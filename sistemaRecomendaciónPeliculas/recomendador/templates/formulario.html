@@ -11,11 +11,11 @@
     <!-- Navbar -->
     <nav class="flex items-center justify-between px-8 py-4 bg-black/50 fixed w-full z-50 backdrop-blur-sm">
         <a href="{% url 'home' %}" class="text-2xl font-bold text-red-600 tracking-wider hover:text-red-500 transition">CINEMIND</a>
-        <div>
-            <a href="{% url 'home' %}" class="text-gray-300 hover:text-white transition text-sm font-medium">
-                &larr; Volver al Inicio
-            </a>
-        </div>
+        <div><a href="{% url 'home' %}" class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded font-semibold transition">Volver al inicio</a></div>
+        
+        <div><a href="{% url 'agregar' %}" class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded font-semibold transition text-sm">
+                Ampliar Base de Conocimiento
+            </a></div>
     </nav>
 
     <!-- Main Content -->
