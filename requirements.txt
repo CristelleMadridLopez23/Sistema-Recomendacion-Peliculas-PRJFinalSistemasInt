@@ -12,7 +12,10 @@ pillow==10.4.0
 # Extras recomendados (para mantener calidad de código)
 black==24.8.0
 flake8==7.1.0
-
 pyDatalog==0.17.4
+# python=3.10
 
-python=3.10
+# Ciencia de Datos e IA
+pandas==2.2.0
+scikit-learn==1.4.0
+numpy==1.26.0
